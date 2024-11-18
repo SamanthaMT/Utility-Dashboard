@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Hello, you are logged in</h1>
+    <a href="{{url_for('billing.add_billing')}}">Press here to add a bill</a><br>
+    <a href="{{url_for('billing.view_billing')}}">View all bills</a><br>
+    <a href="{{url_for('auth.logout')}}">Press here to logout</a><br>
+</body>
+</html>
