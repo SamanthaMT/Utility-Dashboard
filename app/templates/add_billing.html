@@ -15,5 +15,14 @@
         {{ form.cost_gbp }}
         {{ form.submit }}
     </form>
+
+    <hr>
+
+    <h2>Upload Billing Data (CSV)</h2>
+    <form method="POST" action="{{ url_for('billing.upload_csv') }}" enctype="multipart/form-data">
+        <label for="csv_file">Choose CSV File:</label>
+        <input type="file" name="csv_file" id="csv_file" accept=".csv"><br>
+        <button type="submit">Upload CSV</button>
+    </form>
 </body>
 </html>
