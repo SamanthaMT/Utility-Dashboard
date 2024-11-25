@@ -36,7 +36,8 @@ def add_billing():
             user_id=current_user.id,
             date=form.date.data,
             usage_kwh=form.usage_kwh.data,
-            cost_gbp=form.cost_gbp.data)
+            cost_gbp=form.cost_gbp.data
+        )
         db.session.add(new_bill)
         db.session.commit()
         flash("Billing data added successfully!", "success")
@@ -46,6 +47,7 @@ def add_billing():
 
     return render_template('add_billing.html', form=form)
 
+#Adding billing data using CSV file upload
 @billing_bp.route('/upload_csv', methods=['POST'])
 @login_required
 def upload_csv():
@@ -103,9 +105,11 @@ def upload_csv():
     return redirect(url_for('billing.add_billing'))
 
 
-
 @billing_bp.route('/view_billing', methods=['GET'])
 @login_required
 def view_billing():
     billing_data = BillingData.query.filter_by(user_id=current_user.id).all()
     return render_template('view_billing.html', billing_data=billing_data)
+
+
+

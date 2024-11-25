@@ -4,13 +4,14 @@ from flask_login import UserMixin
 
 db = SQLAlchemy()
 
-
+#Table holding user registration data
 class User(db.Model, UserMixin):
     __tablename__ = 'utility_users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(200), nullable=False)
 
+#Table holding data from uploaded bills
 class BillingData(db.Model):
     __tablename__ = 'billing_data'
     id = db.Column(db.Integer, primary_key=True)

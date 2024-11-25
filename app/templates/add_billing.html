@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Billing Document</title>
-</head>
+    </head>
 <body>
+    <!-- Section for adding billing data -->
     <h1>Add billing document here</h1>
 
     <form method="POST" action="">
@@ -18,11 +19,13 @@
 
     <hr>
 
+    <!-- Section for uploading a CSV file -->
     <h2>Upload Billing Data (CSV)</h2>
     <form method="POST" action="{{ url_for('billing.upload_csv') }}" enctype="multipart/form-data">
         <label for="csv_file">Choose CSV File:</label>
         <input type="file" name="csv_file" id="csv_file" accept=".csv"><br>
         <button type="submit">Upload CSV</button>
     </form>
+
 </body>
 </html>
