@@ -10,12 +10,12 @@ from sqlalchemy import func, extract
 dashboard_bp = Blueprint('dashboard',__name__)
 
 #Grouping data into months and finding total
-date = BillingData.date
+date = BillingData.end_date
 
 def get_monthly_data():
     results = BillingData.query.with_entities(
-        extract('year', BillingData.date).label('year'),
-        extract('month', BillingData.date).label('month'),
+        extract('year', date).label('year'),
+        extract('month', date).label('month'),
         func.sum(BillingData.usage_kwh).label('total_kwh'),
         func.sum(BillingData.cost_gbp).label('total_cost')
     ).filter(
@@ -27,21 +27,30 @@ def get_monthly_data():
         extract('year', date),
         extract('month', date)
     ).all()
+    print("Results from get_monthly_data:", results)
 
     return results
 
 #Create graph
 def create_interactive_plot(dataframe):
+    
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(
-        x=dataframe["formatted_date"],
-        y=dataframe["total_kwh"],
-        mode="lines+markers",
-        name="Usage (kWh)",
-        hoverinfo="text",
-        text=[f"Month: {date}<br>Usage: {kwh} kWh" for date, kwh in zip(dataframe["formatted_date"], dataframe["total_kwh"])]
-    ))
+    if dataframe.empty:
+        fig.add_annotation(
+            text="No data available",
+            showarrow=False,
+            font=dict(size=20)
+        )
+    else:
+        fig.add_trace(go.Scatter(
+            x=dataframe["formatted_date"],
+            y=dataframe["total_kwh"],
+            mode="lines+markers",
+            name="Usage (kWh)",
+            hoverinfo="text",
+            text=[f"Month: {date}<br>Usage: {kwh} kWh" for date, kwh in zip(dataframe["formatted_date"], dataframe["total_kwh"])]
+        ))
 
     fig.update_layout(
         title="Energy Usage",
@@ -57,6 +66,9 @@ def create_interactive_plot(dataframe):
 @login_required
 def dashboard():
     results = get_monthly_data()
+
+    if not results:
+        df = pd.DataFrame(columns=["year", "month", "formatted_date", "total_kwh", "total_cost"])
 
     monthly_data = []
     for year, month, total_kwh, total_cost in results:

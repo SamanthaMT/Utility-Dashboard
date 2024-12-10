@@ -5,11 +5,11 @@ from datetime import datetime
 def get_monthly_costs(user_id):
     current_year = datetime.now().year
     monthly_data = db.session.query(
-        extract('month', BillingData.date).label('month'),
+        extract('month', BillingData.end_date).label('month'),
             func.sum(BillingData.cost_gbp).label('total_cost')
    ).filter(
        BillingData.user_id == user_id,
-       extract('year', BillingData.date) == current_year
+       extract('year', BillingData.end_date) == current_year
    ).group_by('month').order_by('month').all()
     
     months = [row[0] for row in monthly_data]

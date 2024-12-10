@@ -11,9 +11,11 @@
 
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        {{ form.date }}
+        {{ form.service }}
         {{ form.usage_kwh }}
         {{ form.cost_gbp }}
+        {{ form.start_date }}
+        {{ form.end_date}}
         {{ form.submit }}
     </form>
 
@@ -22,6 +24,7 @@
     <!-- Section for uploading a CSV file -->
     <h2>Upload Billing Data (CSV)</h2>
     <form method="POST" action="{{ url_for('billing.upload_csv') }}" enctype="multipart/form-data">
+        {{ form.csrf_token }}
         <label for="csv_file">Choose CSV File:</label>
         <input type="file" name="csv_file" id="csv_file" accept=".csv"><br>
         <button type="submit">Upload CSV</button>
