@@ -20,7 +20,7 @@ class BillingData(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('utility_users.id'), nullable=False)
     upload_date = db.Column(db.Date, nullable=False, default=datetime.utcnow)
     service = db.Column(Enum("Electricity", "Gas", "Water", name="service_enum"), nullable=False)
-    usage_kwh = db.Column(db.Float, nullable=False)
+    units = db.Column(db.Float, nullable=False)
     cost_gbp = db.Column(db.Float, nullable=False)
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)

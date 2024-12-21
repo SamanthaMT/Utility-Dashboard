@@ -14,15 +14,17 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
 
 #Create Billing Blueprint
-billing_bp = Blueprint('billing', __name__)
+billing_bp = Blueprint('billing', __name__, template_folder='templates', static_folder='static')
 headings = ("Upload Date", "Service", "Units", "Cost (£)", "Period Start Date", "Period End Date", "Actions")
+
+import billing_home
 
 #Bill Form
 class BillForm(FlaskForm):
     
     service = StringField(validators=[InputRequired()])
     
-    usage_kwh = DecimalField(validators=[InputRequired()],places=1,
+    units = DecimalField(validators=[InputRequired()],places=1,
         render_kw={"placeholder": "0"})
     
     cost_gbp = DecimalField(validators=[InputRequired()],places=2,
@@ -45,7 +47,7 @@ def add_billing():
         new_bill = BillingData(
             user_id=current_user.id,
             service=form.service.data,
-            usage_kwh=form.usage_kwh.data,
+            units=form.units.data,
             cost_gbp=form.cost_gbp.data,
             start_date=form.start_date.data,
             end_date=form.end_date.data
@@ -88,12 +90,12 @@ def upload_csv():
         for row in csv_reader:
             row_count += 1
             service = row.get('service')
-            usage_kwh = row.get('usage_kwh')
+            units= row.get('units')
             cost_gbp = row.get('cost_gbp')
             start_date = row.get('start_date')
             end_date = row.get('end_date')
 
-            if not (service and usage_kwh and cost_gbp and start_date and end_date):
+            if not (service and units and cost_gbp and start_date and end_date):
                 flash(f"Missing data in row: {row}", "danger")
                 continue
 
@@ -102,7 +104,7 @@ def upload_csv():
                 new_bill = BillingData(
                     user_id=current_user.id,
                     service=str(service),
-                    usage_kwh=float(usage_kwh),
+                    units=float(units),
                     cost_gbp=float(cost_gbp),
                     start_date=datetime.strptime(start_date, '%Y-%m-%d').date(),
                     end_date=datetime.strptime(end_date, '%Y-%m-%d').date()
@@ -149,7 +151,7 @@ def get_export_data():
         [
             bill.upload_date,
             bill.service,
-            bill.usage_kwh,
+            bill.units,
             bill.cost_gbp,
             bill.start_date,
             bill.end_date
@@ -198,3 +200,4 @@ def export_csv():
     response.headers['Content-Disposition'] = f'attachment; filename={filename}'
 
     return response
+
