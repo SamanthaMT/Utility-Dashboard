@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/home.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Register</title>
 </head>
 <body>
-    <h1>Register Page</h1>
+    <div class="grid">
+        <h1 class="title">Register</h1>
 
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
+        <form method="POST" action="" class="form">
+            {{ form.hidden_tag() }}
+            <div class="username credentials">{{ form.username }}</div>
+            <div class="password credentials">{{ form.password }}</div>
+            <div class="submit">{{ form.submit }}</div>
+        </form>
 
-    <a href="{{url_for('auth.login')}}">Already have an account? Log in</a>
+        <a href="{{url_for('auth.login')}}" class="redirect_auth">Already have an account? Log in</a>
+    </div> 
 </body>
 </html>

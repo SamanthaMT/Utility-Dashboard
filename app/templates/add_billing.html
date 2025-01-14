@@ -3,32 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/add_billing.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Add Billing Document</title>
     </head>
 <body>
-    <!-- Section for adding billing data -->
-    <h1>Add billing document here</h1>
+    <div class="grid">
+        <a class="billing_redirect redirect" href="{{ url_for('billing.billing_home') }}">Billing home</a>
+        <a class="view_redirect redirect" href="{{ url_for('billing.view_billing') }}">View billing data</a>
+        <!-- Section for adding billing data -->
+        <h1 class = "manual">Add Billing Document Here:</h1>
+        
+            <h3 class="service title_top">Service</h3>
+            <h3 class="units title_top">Units</h3>
+            <h3 class="cost title_top">Cost</h3>
+            <h3 class="start_date title_bottom">Period Start</h3>
+            <h3 class="end_date title_bottom">Period End</h3>
+        
 
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.service }}
-        {{ form.units }}
-        {{ form.cost_gbp }}
-        {{ form.start_date }}
-        {{ form.end_date}}
-        {{ form.submit }}
-    </form>
-
-    <hr>
+        <form method="POST" action="" class="form">
+            {{ form.crsf_token }}
+            {{ form.hidden_tag() }}
+            <div class="service field_top">{{ form.service }}</div>
+            <div class="units field_top">{{ form.units }}</div>
+            <div class="cost field_top">{{ form.cost_gbp }}</div>
+            <div class="start_date field_bottom">{{ form.start_date }}</div>
+            <div class="end_date field_bottom">{{ form.end_date}}</div>
+            <div class="manual_upload submit">{{ form.submit }}</div>
+        </form>
 
     <!-- Section for uploading a CSV file -->
-    <h2>Upload Billing Data (CSV)</h2>
-    <form method="POST" action="{{ url_for('billing.upload_csv') }}" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        <label for="csv_file">Choose CSV File:</label>
-        <input type="file" name="csv_file" id="csv_file" accept=".csv"><br>
-        <button type="submit">Upload CSV</button>
-    </form>
 
+        <h1 class="csv">Upload Billing Data (CSV):</h1>
+        <form method="POST" action="{{ url_for('billing.upload_csv') }}" enctype="multipart/form-data" class="form">
+            {{ form.csrf_token }}
+            
+            <label class="csv_label" for="csv_file">CSV File:</label>
+            <input class="csv_input" type="file" name="csv_file" id="csv_file" accept=".csv">
+        
+            <div class="csv_submit_btn submit">
+                <button type="submit">Upload CSV</button>
+            </div>
+        </form>
+
+    </div>
 </body>
 </html>

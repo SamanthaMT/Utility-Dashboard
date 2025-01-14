@@ -1,0 +1,80 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 50px 60px 40px 1fr;
+    grid-gap: 5px;
+    width: 100%;
+    height: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: rgb(85, 85, 85);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    justify-items: center;
+}
+
+h1 {
+    grid-area: 2 / 1 / 3 / 5;
+    font-size: 35px;
+}
+
+.billing_redirect {
+    grid-area: 1 / 1 / 2 / 3;
+}
+
+.add_redirect {
+    grid-area: 1 / 3 / 2 / 5;
+}
+
+.pdf_btn {
+    grid-area: 3 / 3 / 4 / 4;
+}
+
+.csv_btn {
+    grid-area: 3 / 4 / 4 / 5;
+}
+
+.bill_display {
+    grid-area: 4 / 1 / 5 / 5;
+    width: 96%;
+    margin: 0 0 5% 0;
+}
+
+.bill_display label, .bill_display select, 
+#billingTable_info {
+    color: rgb(255, 255, 255);
+}
+
+.bill_display option {
+    background: rgb(85, 85, 85);
+}
+
+.redirect {
+    font-size: 20px;
+    align-self: center;
+    margin: 3%;
+}
+
+.redirect, .export {
+    color:rgb(13, 202, 240);
+}
+
+.redirect:hover , .export:hover {
+    color: rgb(16, 255, 219);
+}
+
+.export {
+    font-size: 16px;
+    text-decoration: none;
+    border: 2px solid rgb(13, 202, 240);
+    border-radius: 5px;
+    width: 70%;
+    height: 70%;
+    align-self: center;
+    margin: 3%;
+}
+
+.export:hover{
+    border: 2px solid rgb(16, 255, 219);
+    border-radius: 5px;
+}

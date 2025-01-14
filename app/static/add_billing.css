@@ -1,0 +1,141 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: 50px repeat(10, 1fr) 5%;
+    grid-gap: 5px;
+    width: 100%;
+    height: 700px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: rgb(85, 85, 85);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    justify-items: center;
+}
+
+.billing_redirect {
+    grid-area: 1 / 1 / 2 / 5;
+}
+
+.view_redirect {
+    grid-area: 1 / 5 / 2 / 9;
+}
+
+.redirect {
+    align-self: center;
+    font-size: 20px;
+    color:rgb(13, 202, 240);
+    margin: 3%;
+}
+
+.redirect:hover {
+    color: rgb(16, 255, 219);
+}
+
+.manual {
+    grid-area: 2 / 2 / 3 / 8;
+}
+
+.service {
+    grid-column: 2 /4;
+}
+
+.units {
+    grid-column: 4 / 6;
+}
+
+.cost {
+    grid-column: 6 / 8;
+}
+
+.start_date {
+    grid-column: 3 / 5;
+}
+
+.end_date {
+    grid-column: 5 / 7;
+}
+
+.manual_upload {
+    grid-area: 7 / 4 / 8 / 6;
+}
+
+.title_top {
+    grid-row: 3 / 4;
+    color: rgb(16, 255, 219);
+    font-size: 15px;
+    align-content: end;
+}
+
+.field_top {
+    grid-row: 4 / 5;
+}
+
+.title_bottom {
+    grid-row: 5 / 6;
+    font-size: 15px;
+    color:rgb(16, 255, 219);
+    align-content: end;
+}
+
+.field_bottom {
+    grid-row: 6 / 7;
+}
+
+.csv {
+    grid-area: 9 / 2 / 10 / 8;
+}
+
+.csv_label {
+    grid-area: 10 / 2 / 11 / 5;
+    font-size: 18px;
+    justify-self: end;
+    margin: 0 5% 0 0;
+}
+
+.csv_input {
+    grid-area: 10 / 5 / 11 / 8;
+    justify-self: start;
+    margin: 0 0 0 5%;
+}
+
+.csv_submit_btn {
+    grid-area: 11 / 2 / 12 / 8;
+}
+
+.form {
+    display: contents;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.label {
+    font-size: 15px;
+}
+
+.submit input, .submit button {
+    text-decoration: none;
+    border: solid 3px rgb(16, 255, 219);
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s, transform 0.1s;
+    background-color: rgb(85, 85, 85);
+}
+
+.submit input:hover .submit button:hover {
+    box-shadow: 4px 4px rgba(0, 0, 0, 0.9);
+}
+
+.submit input:active, .submit button:active {
+    box-shadow: none;
+    color:rgb(16, 255, 219);
+    transform: translateY(2px);
+}

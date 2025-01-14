@@ -147,6 +147,7 @@ def view_billing():
 
 def get_export_data():
     billing_data=BillingData.query.filter_by(user_id=current_user.id).all()
+    headings = ["Upload Date", "Service", "Units", "Cost(GBP)", "Start Date", "End Date"]
     data = [
         [
             bill.upload_date,
@@ -158,7 +159,7 @@ def get_export_data():
         ]
         for bill in billing_data
     ]
-    return data
+    return headings, data
 
 def get_timestamped_filename(base_name, extension):
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
